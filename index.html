@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Like button</title>
+    <meta name="google-signin-client_id" content="1022786737721-8ksdo11vd843ev1qpd4pjdpbcjqg56ba.apps.googleusercontent.com" >
+    <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        body{
-            zoom:400% ;
-        }
-    </style>
 </head>
-<body>
-    <section class="flex justify-center items-center h-full">
-        <button class="minus" onclick="decrease()">-</button>
-        <div class="number w-8 text-center">0</div>
-        <button class="plus" onclick="increase()">+</button>
-    </section>
+<body class="flex justify-center items-center h-screen">
+    <a data-onsuccess="onSignIn" class="g-signin2 outline outline-1 rounded-sm w-48 h-9 flex justify-center items-center gap-1 max-sm:min-w-60">
+        <img  alt="google-logo" class="h-5 w-5" />
+        <p class="text-xl font-bold text-gray-600">Google</p>
+    </a>
 
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-        const minus = document.querySelector('.minus')
-        const plus = document.querySelector('.plus')
-
-        function decrease(){
-            const num = document.querySelector('.number');
-            let intNum = parseInt(num.innerText)
-            num.innerText = intNum-1;
+        function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         }
-        function increase(){
-            const num = document.querySelector('.number');
-            let intNum = parseInt(num.innerText)
-            num.innerText = intNum+1;
+
+        // <a href="#" onclick="signOut();">Sign out</a>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            });
         }
     </script>
 </body>
 </html>
+
+
+
+<!-- 
+
+onclick="onSignIn()" 
+
+
+-->
